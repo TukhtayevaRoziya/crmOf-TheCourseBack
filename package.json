@@ -1,0 +1,22 @@
+{
+  "name": "crm-back",
+  "version": "1.0.0",
+  "description": "I want to test my persistence, so I'm creating a CRM project as a MERN Stack developer",
+  "main": "express.js",
+  "scripts": {
+    "dev": "nodemon express.js",
+    "start": "node express.js"
+  },
+  "keywords": [],
+  "author": "TukhtayevaRoziya",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  }
+}
