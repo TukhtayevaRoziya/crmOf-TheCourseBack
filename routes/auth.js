@@ -1,6 +1,8 @@
 const { Router } = require('express')
 const admin = require('../config/admin')
 
+const jwt = require('jsonwebtoken')
+
 const router = Router()
 
 router.get('/', (req, res) => {
@@ -16,6 +18,9 @@ async function findEmail(email) {
 router.post('/login', async (req, res) => {
   const admin = await findEmail(req.body.email)
   const password = admin.password === req.body.password
+  const token = jwt.sign({ _id: admin._id }, '9bThisIsMySecterToken!.', {
+    expiresIn: '30d',
+  })
 
   if (!admin) {
     return res.status(400).json({ mgs: 'Something went wrong!' })
@@ -25,7 +30,10 @@ router.post('/login', async (req, res) => {
     return res.status(400).json({ mgs: 'Something went wrong!' })
   }
 
-  return res.status(200).json({ msg: 'You are logged in' })
+  return res
+    .header('x-auth-token', token)
+    .status(200)
+    .json({ msg: 'You are logged in', token })
 })
 
 module.exports = router

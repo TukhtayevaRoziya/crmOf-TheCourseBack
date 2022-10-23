@@ -1,5 +1,6 @@
 const admin = [
   { 
+    _id: 1, 
     email: 'test@gmail.com',
     password: '1234567',
     username: 'Name Surname'
