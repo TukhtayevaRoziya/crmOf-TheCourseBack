@@ -9,6 +9,8 @@ const teachersNum = 754
 const eventsNum = 40
 const foodNum = 32
 
+const recent_students = 456
+
 const data = [
   {
     id: 1,
@@ -38,6 +40,10 @@ const data = [
 
 router.get('/info', (req, res) => {
   res.send(data)
+})
+
+router.get('/recent_students', (req, res) => {
+  res.send({count: recent_students})
 })
 
 const chartData = {
