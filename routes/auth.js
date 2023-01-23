@@ -5,8 +5,14 @@ const jwt = require('jsonwebtoken')
 
 const router = Router()
 
+const adminData = {
+  name: admin[0].name,
+  surname: admin[0].surname,
+  image: admin[0].image,
+}
+
 router.get('/', (req, res) => {
-  res.json(admin)
+  res.json(adminData)
 })
 
 async function findEmail(email) {
