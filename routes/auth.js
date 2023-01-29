@@ -22,13 +22,13 @@ async function findEmail(email) {
 
 // Login Route
 router.post('/login', async (req, res) => {
-  const admin = await findEmail(req.body.email)
-  const password = admin.password === req.body.password
-  const token = jwt.sign({ _id: admin._id }, '9bThisIsMySecterToken!.', {
+  const myAdmin = await findEmail(req.body.email)
+  const password = myAdmin?.password == req.body.password
+  const token = jwt.sign({ _id: myAdmin?._id }, '9bThisIsMySecterToken!.', {
     expiresIn: '30d',
   })
 
-  if (!admin) {
+  if (!myAdmin) {
     return res.status(400).json({ mgs: 'Something went wrong!' })
   }
 
