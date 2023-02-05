@@ -1,21 +1,16 @@
 const { Router } = require("express");
 const admin = require("../config/admin");
-const Admin = require('../models/admin')
+const Admin = require("../models/admin");
 const jwt = require("jsonwebtoken");
-const auth = require("../models/admin");
+var validator = require("email-validator");
 
 const router = Router();
 
-const adminData = {
-  name: admin[0].name,
-  surname: admin[0].surname,
-  image: admin[0].image,
-};
-
 router.get("/", (req, res) => {
-  Admin.find().then((result)=>{
-    res.send(result)
-   })
+  Admin.find().then((result) => {
+    res.send(result);
+  });
+  
 });
 
 async function findEmail(email) {
@@ -45,15 +40,36 @@ router.post("/login", async (req, res) => {
     .json({ msg: "You are logged in", token });
 });
 
-router.put("/settings", (req, res) => {
-  const newAdminData = new Contact({
+router.put("/settings", async (req, res) => {
+  if(validator.validate(req.body.email)){
+  ; // true
+
+  const newAdminData = new Admin({
     name: req.body.name,
     surname: req.body.surname,
-    image:req.body.image
-  })
-  const savedAdminData = newAdminData.save()
-  console.log(savedAdminData);
-  return res.header("x-auth-token",'').status(200).json(savedAdminData)
+    place: req.body.place,
+    tel: req.body.tel,
+    email: req.body.email
+  });
+
+
+  Admin.findOne(
+    {},
+    {},
+    { sort: { created_at: -1 } },
+    async function (err, post) {
+      await Admin.findOneAndDelete({
+        _id: String(post._id),
+      });
+    }
+  );
+
+  const savedAdminData = newAdminData.save();
+  savedAdminData.then(function (result) {
+    res.json(result);
+  });
+}
+res.status(400).json('Please write correct email!');
 });
 
 module.exports = router;
