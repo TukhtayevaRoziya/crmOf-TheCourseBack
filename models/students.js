@@ -29,8 +29,16 @@ const StudentsSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  address: {
+  className: {
     type: String,
+    required: true,
+  },
+  payment: {
+    type: Boolean,
+    required: true,
+  },
+  id: {
+    type: Number,
     required: true,
   },
 

@@ -1,4 +1,6 @@
 const { Router } = require("express");
+const Student = require("../models/students");
+
 // const jwt = require("jsonwebtoken");
 
 const router = Router();
@@ -91,16 +93,25 @@ const students = [
 ];
 
 router.get("/", (req, res) => {
-  res.send(students);
+  // res.send(students);
+  Student.find().then((result) => {
+    res.send(result);
+  });
 });
 
 router.get("/unpaid", (req, res) => {
-  res.send(students.filter((e) => (!e.payment ? e : null)));
+  Student.find().then((result) => {
+    res.send(result.filter((e) => (!e.payment ? e : null)));
+  });
 });
 
 router.post("/add", (req, res) => {
-  console.log(req.body.name);
-  res.send(req.body)
+  const newStudentData = new Student(req.body);
+  const savedStudentData = newStudentData.save();
+  savedStudentData.then(function (result) {
+    res.json(result);
+  });
+
   // jwt.verify(req.body.token, "shhhhh", function (err, decoded) {
   //   if (err) {
   //     console.log(err);
