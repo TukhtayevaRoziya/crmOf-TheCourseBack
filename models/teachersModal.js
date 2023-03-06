@@ -20,7 +20,7 @@ const TeachersSchema = mongoose.Schema({
   university: {
     type: String,
     required: true,
-  },
+  }, 
   degree: {
     type: String,
     required: true,
