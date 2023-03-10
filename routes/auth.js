@@ -6,17 +6,14 @@ var validator = require("email-validator");
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  Admin.find().then((result) => {
-    res.send(result);
-  });
-  
-});
-
 async function findEmail(email) {
   const adminEmail = admin.filter((admin) => admin.email === email);
   return adminEmail[0];
 }
+
+router.get('/', (req,res)=>{
+  res.send('Hello') 
+})
 
 // Login Route
 router.post("/login", async (req, res) => {
@@ -38,38 +35,6 @@ router.post("/login", async (req, res) => {
     .header("x-auth-token", token)
     .status(200)
     .json({ msg: "You are logged in", token });
-});
-
-router.put("/settings", async (req, res) => {
-  if(validator.validate(req.body.email)){
-  ; // true
-
-  const newAdminData = new Admin({
-    name: req.body.name,
-    surname: req.body.surname,
-    place: req.body.place,
-    tel: req.body.tel,
-    email: req.body.email
-  });
-
-
-  Admin.findOne(
-    {},
-    {},
-    { sort: { created_at: -1 } },
-    async function (err, post) {
-      await Admin.findOneAndDelete({
-        _id: String(post._id),
-      });
-    }
-  );
-
-  const savedAdminData = newAdminData.save();
-  savedAdminData.then(function (result) {
-    res.json(result);
-  });
-}
-res.status(400).json('Please write correct email!');
 });
 
 module.exports = router;
