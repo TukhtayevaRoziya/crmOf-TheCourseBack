@@ -1,112 +1,58 @@
-const { Router } = require("express");
-const Item = require("../models/item");
-const multer = require("multer");
-const express = require("express");
-const path = require("path");
-var upload = multer({ dest: "upload/" });
-var fs = require("fs");
-// const jwt = require("jsonwebtoken");
-var type = upload.single("recfile");
+const { Router } = require('express')
 
-const router = Router();
+const router = Router()
+// request - iltimos
+// response - javob
 
-router.get("/", (req, res) => {
-  // res.send(students);
-  Item.find().then((result) => {
-    res.send(result);
-  });
-});
+const studentsNum = 932
+const teachersNum = 754
+const eventsNum = 40
+const foodNum = 32
 
-router.put("/update", async (req, res) => {
-  const newAdminData = new Item({
-    title: req.body.title,
-    price: req.body.price,
-    size: req.body.size,
-    phone: req.body.phone,
-    image: req.body.image,
-  });
+const recent_students = 456
 
-  await Item.findByIdAndUpdate(
-    req.body.id,
-    {
-      title: req.body.title,
-      price: req.body.price,
-      size: req.body.size,
-      phone: req.body.phone,
-      image: req.body.image,
-    },
-    { new: true },
-    []
-  );
-  Item.find().then((result) => {
-    res.send(result);
-  });
-
-  // const savedAdminData = newAdminData.save();
-  // savedAdminData.then(function (result) {
-  //   res.json(result);
-  // });
-});
-router.delete("/delete/:id", async (req, res) => {
-  await Item.findByIdAndDelete(req.params.id);
-
-  Item.find().then((result) => {
-    res.send(result);
-  });
-});
-
-const imageStorage = multer.diskStorage({
-  // Destination to store image
-  destination: "images",
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
-    );
-    // file.fieldname is name of the field (image)
-    // path.extname get the uploaded file extension
+const data = [
+  {
+    id: 1,
+    logo_color: '#4d44b5',
+    title: 'Students',
+    text: studentsNum,
   },
-});
-
-const imageUpload = multer({
-  storage: imageStorage,
-  limits: {
-    fileSize: 1000000, // 1000000 Bytes = 1 MB
+  {
+    id: 2,
+    logo_color: '#FB7D5B',
+    title: 'Teachers',
+    text: teachersNum,
   },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(png|jpg)$/)) {
-      // upload only png and jpg format
-      return cb(new Error("Please upload a Image"));
-    }
-    cb(undefined, true);
+  {
+    id: 3,
+    logo_color: '#FCC43E',
+    title: 'Events',
+    text: eventsNum,
   },
-});
-
-router.post(
-  "/uploadImage",
-  imageUpload.single("image"),
-  (req, res) => {
-    res.send(req.file);
+  {
+    id: 4,
+    logo_color: '#303972',
+    title: 'Food',
+    text: foodNum,
   },
-  (error, req, res, next) => {
-    res.status(400).send({ error: error.message });
-  }
-);
+]
 
-router.post("/add", (req, res) => {
-  const newItemData = new Item(req.body);
-  const savedItemData = newItemData.save();
-  savedItemData.then(function (result) {
-    res.json(result);
-  });
+router.get('/info', (req, res) => {
+  res.send(data)
+})
 
-  // jwt.verify(req.body.token, "shhhhh", function (err, decoded) {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  //   console.log(decoded)
-  //   res.send('decoded')
-  // });
-});
+router.get('/recent_students', (req, res) => {
+  res.send({count: recent_students})
+})
 
-module.exports = router;
+const chartData = {
+  data1: [25, 56, 60, 56, 90],
+  data2: [50, 70, 10, 87, 23, 90],
+}
+
+router.get('/chart', (req, res) => {
+  res.send(chartData)
+})
+
+module.exports = router
