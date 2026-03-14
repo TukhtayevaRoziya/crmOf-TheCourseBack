@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 var validator = require("email-validator");
 
 const router = Router();
-
+ 
 router.get("/", (req, res) => {
   Admin.find().then((result) => {
     res.send(result);
