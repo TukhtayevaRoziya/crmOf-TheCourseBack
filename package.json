@@ -14,13 +14,10 @@
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.20"
   },
-    "engines": {
+  "engines": {
     "node": "24.x"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/material": "^5.10.10",
     "cors": "^2.8.5",
     "ejs": "^3.1.8",
     "email-validator": "^2.0.4",
