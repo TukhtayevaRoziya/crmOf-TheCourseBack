@@ -1,11 +1,11 @@
 const { Router } = require("express");
-const Student = require("../models/students");
+// const Student = require("../models/students");
 
 // const jwt = require("jsonwebtoken");
 
 const router = Router();
 
-const students = [
+ const students = [
   {
     id: 1,
     fullName: "Tukhtayeva Roziya",
@@ -91,18 +91,17 @@ const students = [
     payment: true,
   },
 ];
-
 router.get("/", (req, res) => {
-  // res.send(students);
-  Student.find().then((result) => {
-    res.send(result);
-  });
+  res.send(students);
+  // Student.find().then((result) => {
+  //   res.send(result);
+  // });
 });
 
 router.get("/unpaid", (req, res) => {
-  Student.find().then((result) => {
-    res.send(result.filter((e) => (!e.payment ? e : null)));
-  });
+  // Student.find().then((result) => {
+  //   res.send(result.filter((e) => (!e.payment ? e : null)));
+  // });
 });
 
 router.post("/add", (req, res) => {

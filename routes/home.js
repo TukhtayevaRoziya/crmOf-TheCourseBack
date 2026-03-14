@@ -56,3 +56,10 @@ router.get('/chart', (req, res) => {
 })
 
 module.exports = router
+
+
+router.get('/', (req, res) => {
+  res.send('Home page');
+});
+
+module.exports = router;
