@@ -6,7 +6,7 @@
      { "src": "/(.*)", "dest": "/express.js" }
   ],
   "functions": {
-   "/**/*.js": {
+   "**/*.js": {
      "maxDuration": 30
    }
  }
