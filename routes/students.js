@@ -18,7 +18,7 @@ const router = Router();
     fullName: "Alex Alex",
     class: "VII 4",
     amount: "$ 60,036",
-    payment: false,
+    payment: true,
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const router = Router();
     fullName: "Alejandro Martín",
     class: "VII 9",
     amount: "$ 50,980",
-    payment: false,
+    payment: true,
   },
   {
     id: 6,
@@ -53,14 +53,14 @@ const router = Router();
     fullName: "Einar Montalvo",
     class: "VII 7",
     amount: "$ 34,036",
-    payment: false,
+    payment: true,
   },
   {
     id: 8,
     fullName: "Михаил Русаков",
     class: "VII 7",
     amount: "$ 89,036",
-    payment: false,
+    payment: true,
   },
   {
     id: 9,
@@ -100,7 +100,7 @@ router.get("/", (req, res) => {
 
 router.get("/unpaid", (req, res) => {
   // Student.find().then((result) => {
-  //   res.send(result.filter((e) => (!e.payment ? e : null)));
+    res.send(students.filter((e) => (!e.payment ? e : null)));
   // });
 });
 

@@ -10,7 +10,7 @@ const router = Router();
     fullName: "Tukhtayeva Roziya",
     class: "VII 3",
     amount: "$ 30,036",
-    payment: false,
+    payment: true,
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const router = Router();
     fullName: "John Surname",
     class: "VII 8",
     amount: "$ 90,036",
-    payment: false,
+    payment: true,
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const router = Router();
     fullName: "Agnieszka Murdoch",
     class: "VII 2",
     amount: "$ 57,036",
-    payment: false,
+    payment: true,
   },
   {
     id: 7,
@@ -66,7 +66,7 @@ const router = Router();
     fullName: "Sarah Martín",
     class: "VII 7",
     amount: "$ 56,036",
-    payment: false,
+    payment: true,
   },
   {
     id: 10,

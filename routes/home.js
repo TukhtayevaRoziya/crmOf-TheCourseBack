@@ -11,7 +11,15 @@ const foodNum = 32
 
 const recent_students = 456
 
-const data = [
+const data = [{
+id:0,
+      name: "Nabila ",
+    surname: "Azalea",
+    place: "Jakarta, Indonesia",
+    tel: "+12 345 6789 0",
+    email: "jordan@mail.com"},
+
+
   {
     id: 1,
     logo_color: '#4d44b5',
@@ -36,8 +44,8 @@ const data = [
     title: 'Food',
     text: foodNum,
   },
-]
 
+]
 router.get('/info', (req, res) => {
   res.send(data)
 })
