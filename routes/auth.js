@@ -63,7 +63,7 @@ router.put("/settings", async (req, res) => {
       });
     }
   );
-
+ 
   const savedAdminData = newAdminData.save();
   savedAdminData.then(function (result) {
     res.json(result);
